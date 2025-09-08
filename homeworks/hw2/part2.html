@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Page 2 of Homework #2"
+    />
+    <title>JavaScript - Homework #2 - Page 2</title>
+    <link rel="stylesheet" href="../../styles.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h2>Enter Three Integers</h2>
+    <form id="numbersForm" onsubmit="return false;">
+        <input type="text" id="num1" placeholder="First integer">
+        <input type="text" id="num2" placeholder="Second integer">
+        <input type="text" id="num3" placeholder="Third integer">
+        <br><br>
+        <button id="processBtn" type="button">Process Numbers</button>
+        <button id="clearBtn" type="button">Clear</button>
+        <button id="fadeBtn" type="button">Fade Results</button>
+        <br><br>
+        <textarea id="results" rows="6" cols="50" readonly></textarea>
+    </form>
+    <br>
+    <a href="hw2.html">Back to Homework #2 </a>
+
+    <script>
+    $(document).ready(function() {
+        function validateAndParse(num) {
+            num = num.trim();
+            if (!/^-?\d+$/.test(num)) return null;
+            return parseInt(num, 10);
+        }
+
+        $('#processBtn').click(function() {
+            $('#results').stop(true, true).css('opacity', 1);
+
+            let n1 = validateAndParse($('#num1').val());
+            let n2 = validateAndParse($('#num2').val());
+            let n3 = validateAndParse($('#num3').val());
+
+            if (n1 === null || n2 === null || n3 === null) {
+                $('#results').val('Error: Please enter valid integers in all boxes.');
+                return;
+            }
+
+            let sum = n1 + n2 + n3;
+            let avg = sum / 3;
+            let prod = n1 * n2 * n3;
+            let smallest = Math.min(n1, n2, n3);
+            let largest = Math.max(n1, n2, n3);
+
+            let output = `Numbers entered: ${n1}, ${n2}, ${n3}\n` +
+                         `Sum: ${sum}\n` +
+                         `Average: ${avg}\n` +
+                         `Product: ${prod}\n` +
+                         `Smallest: ${smallest}\n` +
+                         `Largest: ${largest}`;
+
+            $('#results').val(output);
+        });
+
+        $('#clearBtn').click(function() {
+            $('#num1, #num2, #num3').val('');
+            $('#results').val('').css('opacity', 1);
+        });
+
+        $('#fadeBtn').click(function() {
+            $('#results').fadeOut(1000, function() {
+                $(this).css('opacity', 0);
+            });
+        });
+
+    });
+    </script>
+</body>
+</html>
