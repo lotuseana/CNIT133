@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Student Grades Calculator - Homework 3 Part 1">
+    <title>JavaScript - Homework #3 - Page 1</title>
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <h2>Student Grades</h2>
+    <form id="gradesForm" onsubmit="return false;">
+        <input type="text" id="homework" placeholder="Homework Average">
+        <input type="text" id="midterm" placeholder="Mid-Term Exam Score">
+        <input type="text" id="final" placeholder="Final Exam Score">
+        <input type="text" id="participation" placeholder="Participation">
+        <br><br>
+        <button id="calculateBtn" type="button">Calculate Grade</button>
+        <button id="clearBtn" type="button">Clear</button>
+        <br><br>
+        <textarea id="results" rows="6" cols="50" readonly></textarea>
+    </form>
+    <br>
+    <a href="hw3.html">Back to Homework #3</a>
+    
+    <script>
+        function isValid(value) {
+            if (Number.isInteger(Number(value)) && Number(value) >= 0 && Number(value) <= 100) { 
+                return true;
+            }
+            return false;
+        }
+        
+        function calculateFinalGrade(homework, midterm, final, participation) {
+            return Math.round((homework * 0.3) + (midterm * 0.3) + (final * 0.3) + (participation * 0.1));
+        }
+        
+        function getLetterGrade(grade) {
+            if (grade >= 90) return 'A';
+            if (grade >= 80) return 'B';
+            if (grade >= 70) return 'C';
+            if (grade >= 60) return 'D';
+            return 'F';
+        }
+        
+        document.getElementById('calculateBtn').onclick = function() {
+            let homework = document.getElementById('homework').value;
+            let midterm = document.getElementById('midterm').value;
+            let final = document.getElementById('final').value;
+            let participation = document.getElementById('participation').value;
+            
+            if (isValid(homework) && isValid(midterm) && isValid(final) && isValid(participation)) {
+                let finalGrade = calculateFinalGrade(Number(homework), Number(midterm), Number(final), Number(participation));
+                let letterGrade = getLetterGrade(finalGrade);
+                let output = 'final grade: ' + finalGrade + '\nletter grade: ' + letterGrade;
+                
+                if (letterGrade === 'D' || letterGrade === 'F') {
+                    output += '\n\n**Student must retake the course**';
+                }
+            
+                document.getElementById('results').value = output;
+            }
+            else {
+                document.getElementById('results').value = 'Error: Please enter valid integers between 0 and 100 in all boxes.';
+                return;
+            }
+        };
+        
+        document.getElementById('clearBtn').onclick = function() {
+            document.getElementById('homework').value = '';
+            document.getElementById('midterm').value = '';
+            document.getElementById('final').value = '';
+            document.getElementById('participation').value = '';
+            document.getElementById('results').value = '';
+        };
+    </script>
+</body>
+</html>

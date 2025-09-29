@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Extra Credit - Multiplication Learning Game">
+    <title>JavaScript - Extra Credit - Multiplication Game</title>
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <h2>Multiplication Learning Game</h2>
+    <p>Let's practice multiplication! Answer the questions below.</p>
+    
+    <div id="gameArea">
+        <div id="questionArea">
+            <p id="questionText">How much is <span id="number1">0</span> times <span id="number2">0</span>?</p>
+            <label for="answerInput">Your answer:</label>
+            <input type="number" id="answerInput" min="0" step="1">
+            <br><br>
+            <button id="submitBtn" type="button">Submit Answer</button>
+        </div>
+        
+        <div id="feedbackArea" style="display: none;">
+            <textarea id="feedbackText" rows="3" cols="50" readonly></textarea>
+            <br><br>
+            <button id="yesBtn" type="button" style="display: none;">YES</button>
+            <button id="noBtn" type="button" style="display: none;">NO</button>
+        </div>
+    </div>
+    
+    <br>
+    <a href="hw3.html">Back to Homework #3</a>
+
+    <script>
+        let currentNumber1 = 0;
+        let currentNumber2 = 0;
+        let correctAnswer = 0;
+        let isWaitingForContinue = false;
+
+        function generateQuestion() {
+            currentNumber1 = Math.floor(Math.random() * 10);
+            currentNumber2 = Math.floor(Math.random() * 10);
+            correctAnswer = currentNumber1 * currentNumber2;
+            
+            document.getElementById('number1').textContent = currentNumber1;
+            document.getElementById('number2').textContent = currentNumber2;
+            document.getElementById('answerInput').value = '';
+            document.getElementById('feedbackArea').style.display = 'none';
+            document.getElementById('questionArea').style.display = 'block';
+            isWaitingForContinue = false;
+        }
+
+        function checkAnswer() {
+            const userAnswer = parseInt(document.getElementById('answerInput').value);
+            
+            if (userAnswer === correctAnswer) {
+                document.getElementById('feedbackText').value = 'Very good!';
+                document.getElementById('yesBtn').style.display = 'inline-block';
+                document.getElementById('noBtn').style.display = 'inline-block';
+                document.getElementById('feedbackArea').style.display = 'block';
+                document.getElementById('questionArea').style.display = 'none';
+                isWaitingForContinue = true;
+            } else {
+                document.getElementById('feedbackText').value = 'No. Please try again.';
+                document.getElementById('feedbackArea').style.display = 'block';
+                document.getElementById('answerInput').value = '';
+            }
+        }
+
+        function continueGame() {
+            generateQuestion();
+        }
+
+        function endGame() {
+            document.getElementById('feedbackText').value = 'Thanks for playing, see you next time';
+            document.getElementById('yesBtn').style.display = 'none';
+            document.getElementById('noBtn').style.display = 'none';
+            document.getElementById('questionArea').style.display = 'none';
+        }
+
+        document.getElementById('submitBtn').onclick = function() {
+            if (!isWaitingForContinue) {
+                checkAnswer();
+            }
+        };
+
+        document.getElementById('yesBtn').onclick = function() {
+            continueGame();
+        };
+
+        document.getElementById('noBtn').onclick = function() {
+            endGame();
+        };
+
+        document.getElementById('answerInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter' && !isWaitingForContinue) {
+                checkAnswer();
+            }
+        });
+
+        generateQuestion();
+    </script>
+</body>
+</html>
