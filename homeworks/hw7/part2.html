@@ -6,31 +6,31 @@
     <meta name="description" content="Homework 7 Part 2 - navigation with event-driven menus">
     <title>Homework 7 - Part 2</title>
     <link rel="stylesheet" href="../../styles.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-3fp9ZotH8CfvY7mDRbugzuDUFcAUwvx6pRP70dNDOm8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <style>
         nav {
-            margin: 2rem 0;
+            margin: 20px 0;
         }
 
         .menu {
             list-style: none;
             display: flex;
-            gap: 1rem;
+            gap: 10px;
             padding: 0;
+            justify-content: center;
         }
 
         .menu > li {
             position: relative;
-            background-color: #004b87;
-            border-radius: 4px;
+            background-color: darkblue;
+            border-radius: 10px;
         }
 
         .menu > li > a {
             display: block;
-            color: #fff;
-            padding: 0.75rem 1.25rem;
+            color: white;
+            padding: 10px 20px;
             text-decoration: none;
-            font-weight: 600;
         }
 
         .submenu {
@@ -38,38 +38,38 @@
             position: absolute;
             left: 0;
             top: 100%;
-            background-color: #ffffff;
-            border: 1px solid #c2d1e3;
-            border-radius: 0 0 4px 4px;
+            background-color: lightgrey;
+            border-radius: 10px;
             min-width: 200px;
-            padding: 0.5rem 0;
+            padding: 10px 0;
             display: none;
             z-index: 10;
+            margin-top: 5px;
+        }
+
+        .submenu li {
+            background-color: transparent;
+            margin: 0;
+            padding: 0;
+            width: 100%;
         }
 
         .submenu li a {
             display: block;
-            padding: 0.45rem 1rem;
-            color: #0f355c;
+            padding: 10px 20px;
+            color: black;
             text-decoration: none;
         }
 
         .submenu li a:hover {
-            background-color: #f0f6ff;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-top: 2rem;
+            background-color: aliceblue;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Homework 7 Part 2 - Event Driven Navigation</h1>
-    </header>
+    <h1>Homework 7 Part 2 - Event Driven Navigation</h1>
 
-    <nav aria-label="Homework shortcuts">
+    <nav>
         <ul class="menu">
             <li>
                 <a href="../hw2/hw2.html">Homework 2</a>
@@ -97,7 +97,9 @@
         </ul>
     </nav>
 
-    <a class="back-link" href="hw7.html">Back to Homework 7</a>
+    <ul>
+        <li><a href="hw7.html">Back to Homework #7</a></li>
+    </ul>
 
     <script>
         $(function () {
