@@ -6,101 +6,55 @@
     <meta name="description" content="Homework 7 Part 1 - dynamic styling controls">
     <title>Homework 7 - Part 1</title>
     <link rel="stylesheet" href="../../styles.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-3fp9ZotH8CfvY7mDRbugzuDUFcAUwvx6pRP70dNDOm8=" crossorigin="anonymous"></script>
-    <style>
-        .controls {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1rem;
-            padding: 1rem;
-            border: 1px solid #d6d6d6;
-            border-radius: 6px;
-            background-color: #f3f6fa;
-            margin-bottom: 1.5rem;
-        }
-
-        .control-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.35rem;
-        }
-
-        .control-group label {
-            font-weight: 600;
-        }
-
-        #style-preview {
-            padding: 1.25rem;
-            border-radius: 6px;
-            border: 1px solid #e0e0e0;
-            background-color: #fffdf7;
-            transition: all 0.3s ease;
-        }
-
-        #style-preview p {
-            margin-bottom: 0.7rem;
-        }
-
-        #style-preview p:last-child {
-            margin-bottom: 0;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-top: 2rem;
-        }
-    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Style Lab - Homework 7 Part 1</h1>
-    </header>
+    <h1>Homework 7 Part 1 - Style Lab</h1>
 
-    <section class="controls" aria-label="Style controls">
-        <div class="control-group">
-            <label>Background Color</label>
-            <label>
-                <input type="radio" name="bgColor" value="#fffdf7" checked>
-                Soft Cream
-            </label>
-            <label>
-                <input type="radio" name="bgColor" value="#e4f1ff">
-                Ice Blue
-            </label>
-            <label>
-                <input type="radio" name="bgColor" value="#f4f0ff">
-                Lavender
-            </label>
-        </div>
+    
+    <fieldset>
+        <legend>Background Color</legend>
+        <label>
+            <input type="radio" name="bgColor" value="aliceblue" checked>
+            Alice Blue
+        </label>
+        <label>
+            <input type="radio" name="bgColor" value="lightgrey">
+            Light Grey
+        </label>
+        <label>
+            <input type="radio" name="bgColor" value="lightyellow">
+            Light Yellow
+        </label>
+    </fieldset>
 
-        <div class="control-group">
-            <label>Text Emphasis</label>
-            <label>
-                <input type="checkbox" class="style-toggle" data-style="bold">
-                Bold
-            </label>
-            <label>
-                <input type="checkbox" class="style-toggle" data-style="italic">
-                Italic
-            </label>
-            <label>
-                <input type="checkbox" class="style-toggle" data-style="underline">
-                Underline
-            </label>
-        </div>
+    <fieldset>
+        <legend>Text Emphasis</legend>
+        <label>
+            <input type="checkbox" class="style-toggle" data-style="bold">
+            Bold
+        </label>
+        <label>
+            <input type="checkbox" class="style-toggle" data-style="italic">
+            Italic
+        </label>
+        <label>
+            <input type="checkbox" class="style-toggle" data-style="underline">
+            Underline
+        </label>
+    </fieldset>
 
-        <div class="control-group">
-            <label for="fontSize">Font Size</label>
-            <select id="fontSize">
-                <option value="1rem">Default</option>
-                <option value="1.15rem">Comfortable</option>
-                <option value="1.3rem">Large</option>
-                <option value="0.9rem">Compact</option>
-            </select>
-        </div>
-    </section>
+    <fieldset>
+        <legend>Font Size</legend>
+        <select id="fontSize">
+            <option value="1rem">Default (1rem)</option>
+            <option value="1.2rem">Medium (1.2rem)</option>
+            <option value="1.5rem">Large (1.5rem)</option>
+            <option value="2rem">Extra Large (2rem)</option>
+        </select>
+    </fieldset>
 
-    <main id="style-preview">
+    <div id="style-preview">
         <p>
             JavaScript's object model lets us interact with the DOM in real-time. Tweak these controls to see how the
             computed styles update immediately.
@@ -113,9 +67,11 @@
             Try combining several options: pick a background color, adjust the font size, and experiment with bold,
             italic, or underline emphasis.
         </p>
-    </main>
+    </div>
 
-    <a class="back-link" href="hw7.html">Back to Homework 7</a>
+    <ul>
+        <li><a href="hw7.html">Back to Homework #7</a></li>
+    </ul>
 
     <script>
         $(function () {
