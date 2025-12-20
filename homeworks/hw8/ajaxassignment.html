@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Homework 8 - AJAX Application">
+    <title>Homework 8 - AJAX Application</title>
+    <style>
+        table,th,td {
+          border : 1px solid black;
+          border-collapse: collapse;
+        }
+        th,td {
+          padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Homework 8 - AJAX Application</h1>
+    <p><a href="../../index.html">Back to Main Page (Homework 1)</a></p>
+
+    <button type="button" onclick="loadDoc()">Get CD collection</button>
+    <br><br>
+    <table id="demo"></table>
+
+    <script>
+    function loadDoc() {
+      const xhttp = new XMLHttpRequest();
+      xhttp.onload = function() {
+        myFunction(this);
+      }
+      xhttp.open("GET", "cd_catalog.xml");
+      xhttp.send();
+    }
+    function myFunction(xml) {
+      const xmlDoc = xml.responseXML;
+      const x = xmlDoc.getElementsByTagName("CD");
+      let table="<tr><th>Artist</th><th>Title</th></tr>";
+      for (let i = 0; i <x.length; i++) { 
+        table += "<tr><td>" +
+        x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
+        "</td><td>" +
+        x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+        "</td></tr>";
+      }
+      document.getElementById("demo").innerHTML = table;
+    }
+    </script>
+
+    <h2>Explanation of AJAX</h2>
+    <p>
+        The JavaScript code in this page demonstrates the use of AJAX (Asynchronous JavaScript and XML) to dynamically load and display data from an XML file without requiring a full page refresh. When the user clicks the "Get CD collection" button, the <code>loadDoc()</code> function is triggered. This function creates a new XMLHttpRequest object, which is the core component that enables AJAX functionality. The XMLHttpRequest object is configured with an <code>onload</code> event handler that will execute the <code>myFunction()</code> callback once the XML file has been successfully loaded.
+    </p>
+    <p>
+        The AJAX call is initiated using the <code>open()</code> method, which specifies the HTTP method (GET) and the target resource (cd_catalog.xml). The <code>send()</code> method then dispatches the request to the server. This entire process happens asynchronously, meaning the browser can continue to respond to user interactions while waiting for the XML data. Once the XML file is received, the <code>myFunction()</code> function parses the XML document using <code>responseXML</code>, extracts all CD elements, and iterates through them to build an HTML table dynamically. The table is then inserted into the page using <code>innerHTML</code>, updating only the specific section of the page without reloading the entire document.
+    </p>
+
+    <h2>REST API</h2>
+    <p>
+      The Riot Games API is a REST API that provides data about League of Legends, Valorant, Teamfight Tactics, and other Riot games. 
+      It's a free API that allows you to access data about the games, including players, matches, and other game-related information.
+      When making a call to any Riot API, you need to provide an API key, which is provided by Riot Games after applying for a developer account.
+      The Riot Games API returns data in JSON (JavaScript Object Notation) format, which is lightweight, easy to parse, and widely supported across all modern programming languages and frameworks.
+    </p>
+    <p>
+      For any company looking to use the Riot Games API, using the API is free, and you can monetize your product as long as it doesn't feature gambling functionality.
+      Developers must be careful not to violate the game integrity terms of service such as allowing players an unfair advantage.
+      The Riot Games API has allowed for the creation of many useful tools such as 
+      tracker.gg for Valorant, op.gg for League of Legends, and many more. Try the Riot Games API <a href="https://developer.riotgames.com/apis" target="_blank">here</a>.
+    </p>
+
+</body>
+</html>

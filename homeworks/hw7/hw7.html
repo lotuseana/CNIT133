@@ -23,9 +23,9 @@
         <h1>CNIT 133 Homework 7 - Object Model and Event Model</h1>
     </header>
 
-    <ul>
+    <ul class="parts">
         <li>
-            <button type="button" class="part-toggle" data-target="#part1-desc">Part 1</button>
+            <a class="part-toggle" data-target="#part1-desc" href="part1.html">Part 1</a>
             <div class="part-description" id="part1-desc">
                 Apply background colors, font sizes, and emphasis options to live text as soon as a control changes.
                 <br><br>
@@ -33,7 +33,7 @@
             </div>
         </li>
         <li>
-            <button type="button" class="part-toggle" data-target="#part2-desc">Part 2</button>
+            <a class="part-toggle" data-target="#part2-desc" href="part2.html">Part 2</a>
             <div class="part-description" id="part2-desc">
                 Hover over a horizontal homework menu to reveal links for each part and extra credit entry.
                 <br><br>
@@ -46,9 +46,10 @@
 
     <script>
         $(function () {
-            $(".part-toggle").on("click", function () {
-                const target = $($(this).data("target"));
-                target.slideToggle(200);
+            $(".parts li").on("mouseenter focusin", function () {
+                $(this).find(".part-description").stop(true, true).slideDown(200);
+            }).on("mouseleave focusout", function () {
+                $(this).find(".part-description").stop(true, true).slideUp(150);
             });
         });
     </script>
